@@ -5,6 +5,7 @@ To make a config-date-struct socket server
 
 First ,should make a normal socket demo...
 
-### log
+## third-party
 
-use `spdlog` ,a header only library.
+- log: use `spdlog` ,header only.
+- json: use `rapidjson` ,header only.
