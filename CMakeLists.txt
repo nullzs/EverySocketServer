@@ -8,4 +8,4 @@ add_subdirectory(src)
 
 add_executable(ESServer every_socket_server.cpp)
 
-target_link_libraries(ESServer static_unit_lib log_lib)
+target_link_libraries(ESServer static_unit_lib  init_lib log_lib)

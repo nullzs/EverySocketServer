@@ -1,4 +1,4 @@
 #include "static_unit.h"
 #include <spdlog/spdlog.h>
 
-LogFile StaticUnit::log;
+std::shared_ptr<LogFile> StaticUnit::log;

@@ -1,6 +1,6 @@
 #include "log_file.h"
 
-LogFile::LogFile() {
+LogFile::LogFile(const std::string &path) {
     daily = spdlog::daily_logger_mt("normal-log",
-                                        "logs/daily.txt", 2, 30);
+                                        path, 2, 30);
 }
