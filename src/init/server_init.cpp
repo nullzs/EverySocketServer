@@ -23,4 +23,9 @@ void ServerInit::init_static_value() {
         StaticUnit::listener_conf_list = std::make_shared<std::vector<ListenerType> >();
     }
 
+    {
+        std::lock_guard<std::mutex> locker(StaticUnit::tcp_session_map_mutex);
+        StaticUnit::tcp_session_map = std::make_shared<std::unordered_map<std::string, std::weak_ptr<TcpSession>>>();
+    }
+
 }
