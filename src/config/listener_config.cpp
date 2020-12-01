@@ -97,6 +97,12 @@ void ListenerConfig::get_listener_form_array( const JsonArray &json_array) noexc
 
         //show
         spdlog::info("type:{}, tcp: {}, udp: {}, name: {}", type, tcp_port, udp_port, name);
-        //insert to StaticUnit
+
+        //insert to ListenerConfigList
+        ListenerType listener_type(type, tcp_port, udp_port, name);
+        {
+            std::lock_guard<std::mutex> locker(StaticUnit::listener_conf_list_mutex);
+            StaticUnit::listener_conf_list->push_back(listener_type);
+        }
     }
 }

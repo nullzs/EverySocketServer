@@ -1,5 +1,5 @@
-#ifndef EVERY_SOCKET_SERVER_LOG_FILE_H
-#define EVERY_SOCKET_SERVER_LOG_FILE_H
+#ifndef EVERYSOCKETSERVER_LOG_FILE_H
+#define EVERYSOCKETSERVER_LOG_FILE_H
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/daily_file_sink.h>
@@ -18,4 +18,4 @@ public:
 };
 
 
-#endif //EVERY_SOCKET_SERVER_LOG_FILE_H
+#endif //EVERYSOCKETSERVER_LOG_FILE_H

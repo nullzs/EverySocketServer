@@ -1,7 +1,5 @@
-// Created on 2020/11/30.
-
-#ifndef EVERY_SOCKET_SERVER_SERVER_INIT_H
-#define EVERY_SOCKET_SERVER_SERVER_INIT_H
+#ifndef EVERYSOCKETSERVER_SERVER_INIT_H
+#define EVERYSOCKETSERVER_SERVER_INIT_H
 #include <atomic>
 
 //single-init-object
@@ -16,9 +14,11 @@ public:
     }
     void init();
 private:
-    ServerInit() {is_init.store(false);};
     static std::atomic_bool is_init;
+
+    ServerInit() {is_init.store(false);};
+    void init_static_value();
 };
 
 
-#endif //EVERY_SOCKET_SERVER_SERVER_INIT_H
+#endif //EVERYSOCKETSERVER_SERVER_INIT_H

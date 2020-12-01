@@ -21,7 +21,7 @@ private:
 };
 
 /**
- * file example:
+ * file example: socket.json
  * [{
     "type": 1,
     "tcp_port": 7788,
