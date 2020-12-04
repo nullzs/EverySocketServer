@@ -8,3 +8,9 @@ std::mutex StaticUnit::listener_conf_list_mutex;
 // map<ip+port, session> like: map<"121.22.123.123:17652", session>
 std::shared_ptr<std::unordered_map<std::string, std::weak_ptr<TcpSession> > > StaticUnit::tcp_session_map;
 std::mutex StaticUnit::tcp_session_map_mutex;
+
+std::atomic_bool StaticUnit::destroy_flag;
+
+std::condition_variable StaticUnit::data_queue_wait_condition;
+std::mutex StaticUnit::data_queue_wait_mutex;
+std::shared_ptr<moodycamel::ConcurrentQueue<ReceiveData> > StaticUnit::data_queue;

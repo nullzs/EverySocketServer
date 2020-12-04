@@ -51,8 +51,10 @@ void TcpSession::read_handler(std::error_code ec, std::size_t length) {
     std::string str(data_, length);
     Tools::convert_hex(str);
 
-    //show msg
-    spdlog::info("[tcp] {} => {}", link_str_, str);
+    std::string link_str(link_str_);
+    ReceiveData receive_data(now, ReceiveData::TCP, link_str, str);
+    StaticUnit::data_queue->enqueue(std::move(receive_data));
+    StaticUnit::data_queue_wait_condition.notify_all();
 
     do_read();
 

@@ -28,4 +28,8 @@ void ServerInit::init_static_value() {
         StaticUnit::tcp_session_map = std::make_shared<std::unordered_map<std::string, std::weak_ptr<TcpSession>>>();
     }
 
+    StaticUnit::destroy_flag.store(false);
+
+    StaticUnit::data_queue = std::make_shared<moodycamel::ConcurrentQueue<ReceiveData> >();
+
 }

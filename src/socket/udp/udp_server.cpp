@@ -1,7 +1,7 @@
 
 #include "udp_server.h"
 #include "tools.h"
-#include "spdlog/spdlog.h"
+#include "static_unit.h"
 
 UdpServer::UdpServer(asio::io_context &io_context, unsigned short port, int type)
         : server_socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)), type_(type) {
@@ -27,6 +27,9 @@ void UdpServer::receive_handle(std::error_code &ec, std::size_t byte_receive) {
                 .append(sender_endpoint_.address().to_string())
                 .append(":")
                 .append(std::to_string(sender_endpoint_.port()));
-        spdlog::info("[udp] {} => {}", link_str, str);
+
+        ReceiveData receive_data(now, ReceiveData::UDP, link_str, str);
+        StaticUnit::data_queue->enqueue(std::move(receive_data));
+        StaticUnit::data_queue_wait_condition.notify_all();
     }
 }

@@ -4,8 +4,8 @@ To make a config-date-struct socket server
 ## platform
 
 cross-platform:
-- MSVC (Can build in vs2019 Community version 16.8.2)
-- GUN/Linux (Can build in Debian GNU/Linux 10 (buster) in WSL)
+- MSVC (Build in vs2019 Community version 16.8.2)
+- GUN/Linux (Build in Debian GNU/Linux 10 (buster) in WSL)
 
 ## state
 
