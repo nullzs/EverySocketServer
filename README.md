@@ -18,3 +18,4 @@ And than, modify it.
 - log: use `spdlog` ,header only.
 - json: use `rapidjson` ,header only.
 - socket: use `asio` ,header only.
+- thread safe queue: use `concurrentqueue` ,header only.
