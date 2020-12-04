@@ -32,8 +32,8 @@ void ListenerThreads::listen_thread(unsigned short port, int sock_type, int type
 
     if(TCP_SOCK == sock_type) {
         server = std::make_shared<TcpServer>(io_context, port, type);
-    } else {
-        return;
+    } else if(UDP_SOCK == sock_type) {
+        server = std::make_shared<UdpServer>(io_context, port, type);
     }
 
     spdlog::info("Listen {} : {}", sock_type_str, port);
