@@ -14,7 +14,7 @@ add_executable(ESServer every_socket_server.cpp)
 
 target_link_libraries(ESServer static_unit_lib init_lib
         log_lib config_lib listeners_lib socket_lib
-        thread_pool_lib)
+        thread_pool_lib push_lib)
 
 if (UNIX)
     target_link_libraries(ESServer pthread)

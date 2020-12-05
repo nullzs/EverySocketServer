@@ -14,3 +14,7 @@ std::atomic_bool StaticUnit::destroy_flag;
 std::condition_variable StaticUnit::data_queue_wait_condition;
 std::mutex StaticUnit::data_queue_wait_mutex;
 std::shared_ptr<moodycamel::ConcurrentQueue<ReceiveData> > StaticUnit::data_queue;
+
+std::condition_variable StaticUnit::push_queue_wait_condition;
+std::mutex StaticUnit::push_queue_wait_mutex;
+std::shared_ptr<moodycamel::ConcurrentQueue<std::string> > StaticUnit::push_queue;

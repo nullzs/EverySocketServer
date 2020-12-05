@@ -28,10 +28,15 @@ public:
     //thread destroy flag
     static std::atomic_bool destroy_flag;
 
-    //shared task list: wait condition ,lock mutex and list
+    //shared task queue: wait condition ,lock mutex and list
     static std::condition_variable data_queue_wait_condition;
     static std::mutex data_queue_wait_mutex;
     static std::shared_ptr<moodycamel::ConcurrentQueue<ReceiveData> > data_queue;
+
+    //push data,like task queue
+    static std::condition_variable push_queue_wait_condition;
+    static std::mutex push_queue_wait_mutex;
+    static std::shared_ptr<moodycamel::ConcurrentQueue<std::string> > push_queue;
 };
 
 

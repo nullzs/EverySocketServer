@@ -23,12 +23,9 @@ void UdpServer::receive_handle(std::error_code &ec, std::size_t byte_receive) {
 
         Tools::convert_hex(str);
 
-        std::string link_str = std::string()
-                .append(sender_endpoint_.address().to_string())
-                .append(":")
-                .append(std::to_string(sender_endpoint_.port()));
-
-        ReceiveData receive_data(now, ReceiveData::UDP, link_str, str);
+        ReceiveData receive_data(ReceiveData::UDP, now, type_,
+                                 sender_endpoint_.address().to_string(),
+                                 sender_endpoint_.port(), str);
         StaticUnit::data_queue->enqueue(std::move(receive_data));
         StaticUnit::data_queue_wait_condition.notify_all();
     }

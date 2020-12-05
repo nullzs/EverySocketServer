@@ -1,7 +1,9 @@
 #ifndef EVERYSOCKETSERVER_TOOLS_H
 #define EVERYSOCKETSERVER_TOOLS_H
+
 #include <chrono>
 #include <string>
+#include "receive_data.h"
 
 class Tools {
 public:
@@ -11,6 +13,8 @@ public:
     }
 
     static void convert_hex(std::string &str);
+
+    static void serialize_receive(std::string &ret, const ReceiveData &receive_data);
 };
 
 

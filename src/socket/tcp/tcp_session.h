@@ -24,6 +24,8 @@ public:
 private:
     asio::ip::tcp::socket socket_;
     int type_;
+    std::string addr_;
+    unsigned short port_;
     std::string link_str_;
 
     enum{
