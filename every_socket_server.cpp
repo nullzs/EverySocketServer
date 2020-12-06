@@ -4,6 +4,7 @@
 #include "thread_pool.h"
 #include "push_pool/push_pool.h"
 #include "destroy_win.h"
+#include "destroy_unix.h"
 
 int main(int argc, char **argv) {
     ServerInit::get_instance().init();
@@ -16,6 +17,8 @@ int main(int argc, char **argv) {
     auto listeners = std::make_shared<ListenerThreads>();
 #ifdef WIN32
     auto destroy = std::make_shared<DestroyWin>();
+#else
+    auto destroy = std::make_shared<DestroyUnix>();
 #endif
 
     return 0;

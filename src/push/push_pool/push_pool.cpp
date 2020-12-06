@@ -10,7 +10,7 @@ PushPool::~PushPool() {
     int count{0};
     for (const auto &push_thread: push_threads) {
         push_thread->join();
-        spdlog::info("push pool remove: {}", count);
+        spdlog::info("push pool remove: {}", count++);
     }
     push_threads.clear();
     StaticUnit::log->daily->info("PushPool destroy.");

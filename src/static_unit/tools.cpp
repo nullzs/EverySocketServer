@@ -43,7 +43,7 @@ void Tools::serialize_receive(std::string &ret, const ReceiveData &receive_data)
     ret = buffer.GetString();
 }
 
-void Tools::destroy_thread() {
+void Tools::destroy_thread(const std::string &event, const std::string &platform) {
     StaticUnit::destroy_flag.store(true);
     StaticUnit::data_queue_wait_condition.notify_all();
     StaticUnit::push_queue_wait_condition.notify_all();
@@ -53,5 +53,9 @@ void Tools::destroy_thread() {
         StaticUnit::io_context_queue.try_dequeue(io_context);
         io_context->stop();
     }
+
+    spdlog::error(event);
+    StaticUnit::log->daily->error("[{}] {}", platform, event);
+    StaticUnit::log->daily->flush();
 
 }

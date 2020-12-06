@@ -2,6 +2,7 @@
 #include "spdlog/spdlog.h"
 #include "static_unit.h"
 #include "tools.h"
+#include "destroy_platform.h"
 #ifdef WIN32
 #include <Windows.h>
 
@@ -38,10 +39,7 @@ BOOL CtrlHandler(DWORD fdwCtrlType)
         default:
             return FALSE;
     }
-    Tools::destroy_thread();
-    spdlog::error(event);
-    StaticUnit::log->daily->error(event);
-    StaticUnit::log->daily->flush();
+    Tools::destroy_thread(event, destroy_platform::platform);
 
     //1 second to wait resource destroy when event is "CTRL_CLOSE_EVENT"
     if(fdwCtrlType == CTRL_CLOSE_EVENT) {
