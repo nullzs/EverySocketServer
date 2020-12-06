@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <atomic>
 #include <condition_variable>
+#include "asio.hpp"
 #include "log_file.h"
 #include "listener_type.h"
 #include "tcp/tcp_session.h"
@@ -37,6 +38,10 @@ public:
     static std::condition_variable push_queue_wait_condition;
     static std::mutex push_queue_wait_mutex;
     static std::shared_ptr<moodycamel::ConcurrentQueue<std::string> > push_queue;
+
+    //io_context queue
+    static moodycamel::ConcurrentQueue< std::shared_ptr<asio::io_context> > io_context_queue;
+
 };
 
 

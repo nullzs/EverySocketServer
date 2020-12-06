@@ -1,5 +1,6 @@
 #include "thread_pool.h"
 #include "thread_task.h"
+#include "static_unit.h"
 #include "spdlog/spdlog.h"
 
 ThreadPool::ThreadPool(int thread_count) :thread_count_(thread_count) {
@@ -7,12 +8,15 @@ ThreadPool::ThreadPool(int thread_count) :thread_count_(thread_count) {
 }
 
 ThreadPool::~ThreadPool() {
+    spdlog::info("try destroy thread_pool");
     int num{0};
     for(auto &task_thread: threads_) {
         task_thread->join();
         spdlog::info("thread: {} join", num++);
     }
     threads_.clear();
+    spdlog::info("destroy thread_pool");
+    StaticUnit::log->daily->info("ThreadPool destroy.");
 }
 
 void ThreadPool::create_thread_pool()  {

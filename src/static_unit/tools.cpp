@@ -1,4 +1,5 @@
 #include "tools.h"
+#include "static_unit.h"
 #include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"
 #include <sstream>
@@ -40,4 +41,17 @@ void Tools::serialize_receive(std::string &ret, const ReceiveData &receive_data)
     writer.EndObject();
 
     ret = buffer.GetString();
+}
+
+void Tools::destroy_thread() {
+    StaticUnit::destroy_flag.store(true);
+    StaticUnit::data_queue_wait_condition.notify_all();
+    StaticUnit::push_queue_wait_condition.notify_all();
+
+    while (StaticUnit::io_context_queue.size_approx() > 0) {
+        std::shared_ptr<asio::io_context> io_context;
+        StaticUnit::io_context_queue.try_dequeue(io_context);
+        io_context->stop();
+    }
+
 }

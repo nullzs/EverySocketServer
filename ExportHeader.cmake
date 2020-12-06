@@ -8,6 +8,7 @@ include_directories(src/listeners)
 include_directories(src/socket)
 include_directories(src/thread_pool)
 include_directories(src/push)
+include_directories(src/destroy)
 
 
 # third_party

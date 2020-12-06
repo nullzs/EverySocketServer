@@ -26,22 +26,26 @@ void ListenerThreads::init() {
 
 void ListenerThreads::listen_thread(unsigned short port, int sock_type, int type) {
     spdlog::info("Thread-msg port: {}, sock_type: {}, type: {}", port, sock_type, type);
-    asio::io_context io_context;
+    auto io_context = std::make_shared<asio::io_context>();
+
+    StaticUnit::io_context_queue.enqueue(io_context);
+
     std::shared_ptr<SocketServer> server;
     std::string sock_type_str = sock_type == TCP_SOCK ? "TCP" : "UDP";
 
     if(TCP_SOCK == sock_type) {
-        server = std::make_shared<TcpServer>(io_context, port, type);
+        server = std::make_shared<TcpServer>(*io_context, port, type);
     } else if(UDP_SOCK == sock_type) {
-        server = std::make_shared<UdpServer>(io_context, port, type);
+        server = std::make_shared<UdpServer>(*io_context, port, type);
     }
 
     spdlog::info("Listen {} : {}", sock_type_str, port);
-    io_context.run();
+    io_context->run();
 }
 
 ListenerThreads::~ListenerThreads() {
     join_thread();
+    StaticUnit::log->daily->info("ListenerThreads destroy.");
 }
 
 void ListenerThreads::join_thread() {

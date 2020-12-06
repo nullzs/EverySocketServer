@@ -18,3 +18,5 @@ std::shared_ptr<moodycamel::ConcurrentQueue<ReceiveData> > StaticUnit::data_queu
 std::condition_variable StaticUnit::push_queue_wait_condition;
 std::mutex StaticUnit::push_queue_wait_mutex;
 std::shared_ptr<moodycamel::ConcurrentQueue<std::string> > StaticUnit::push_queue;
+
+moodycamel::ConcurrentQueue< std::shared_ptr<asio::io_context> > StaticUnit::io_context_queue;

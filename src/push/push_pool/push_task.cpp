@@ -19,4 +19,5 @@ void PushTask::do_task(int type) {
         if(!StaticUnit::push_queue->try_dequeue(data)) continue;
         push_obj->push_data(data);
     }
+    spdlog::info("push task end:{}", 0);
 }

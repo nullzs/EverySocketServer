@@ -1,4 +1,5 @@
 #include "push_pool.h"
+#include "static_unit.h"
 #include "spdlog/spdlog.h"
 
 PushPool::PushPool(int thread_count, int type) {
@@ -12,6 +13,7 @@ PushPool::~PushPool() {
         spdlog::info("push pool remove: {}", count);
     }
     push_threads.clear();
+    StaticUnit::log->daily->info("PushPool destroy.");
 }
 
 void PushPool::make_pool(int thread_count, int type) {
