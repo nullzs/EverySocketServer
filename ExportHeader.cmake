@@ -17,4 +17,5 @@ include_directories(third_party/spdlog-1.8.1/include)
 include_directories(third_party/rapidjson-1.1.0/include)
 include_directories(third_party/asio-1.18.0/include)
 include_directories(third_party/concurrentqueue-1.0.2)
+include_directories(third_party/Catch2-2.13.3/single_include)
 

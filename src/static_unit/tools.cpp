@@ -11,7 +11,22 @@ void Tools::convert_hex(std::string &str) {
         result << std::uppercase << std::setw(2) << std::setfill('0') << std::hex << static_cast<unsigned short>(val);
     }
     str = std::move(result.str());
+}
 
+void Tools::convert_hex_to_str(std::string &str){
+    std::stringstream  result;
+    std::string temp(str.size()/2, '0');
+    int temp_num{0};
+    int count = static_cast<int>(str.size()/2);
+
+    for(int i=0; i< count; i++) {
+
+        result << str.substr(2*i, 2);
+        result >> std::hex>> temp_num;
+        result.clear();
+        temp.at(i) = static_cast<unsigned char>(temp_num);
+    }
+    swap(temp, str);
 }
 
 void Tools::serialize_receive(std::string &ret, ReceiveData &receive_data) {

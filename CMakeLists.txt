@@ -24,3 +24,9 @@ elseif (WIN32)
         target_link_libraries(ESServer ws2_32 wsock32)
     endif ()
 endif ()
+
+# test case
+if (DEFINED ENABLE_TEST_UNIT)
+    message("TEST ON")
+    add_subdirectory(tests)
+endif ()

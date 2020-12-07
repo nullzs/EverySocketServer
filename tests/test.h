@@ -1,0 +1,6 @@
+#ifndef EVERYSOCKETSERVER_TEST_H
+#define EVERYSOCKETSERVER_TEST_H
+
+#include "catch2/catch.hpp"
+
+#endif //EVERYSOCKETSERVER_TEST_H

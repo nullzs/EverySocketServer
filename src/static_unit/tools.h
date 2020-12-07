@@ -14,9 +14,12 @@ public:
 
     static void convert_hex(std::string &str);
 
+    static void convert_hex_to_str(std::string &str);
+
     static void serialize_receive(std::string &ret, ReceiveData &receive_data);
 
     static void destroy_thread(const std::string &event, const std::string &platform);
+
 };
 
 
