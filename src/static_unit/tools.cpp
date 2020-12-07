@@ -14,10 +14,11 @@ void Tools::convert_hex(std::string &str) {
 
 }
 
-void Tools::serialize_receive(std::string &ret, const ReceiveData &receive_data) {
+void Tools::serialize_receive(std::string &ret, ReceiveData &receive_data) {
+
+    Tools::convert_hex(receive_data.data);
     rapidjson::StringBuffer buffer;
     rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
-
     writer.StartObject();
 
     writer.Key("type");

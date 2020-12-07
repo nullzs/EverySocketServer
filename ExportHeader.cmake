@@ -9,6 +9,7 @@ include_directories(src/socket)
 include_directories(src/thread_pool)
 include_directories(src/push)
 include_directories(src/destroy)
+include_directories(src/frame_decoder)
 
 
 # third_party

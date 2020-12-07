@@ -8,7 +8,6 @@ class DataPush {
 public:
     virtual ~DataPush() = default;
     virtual void push_data(const std::string &) = 0;
-    virtual void push_receive_data(const ReceiveData &) = 0;
 };
 
 

@@ -7,7 +7,6 @@
 class DataPushPrint : public DataPush{
 public:
     void push_data(const std::string &) override;
-    void push_receive_data(const ReceiveData &) override;
 
 };
 

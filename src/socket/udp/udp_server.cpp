@@ -21,8 +21,6 @@ void UdpServer::receive_handle(std::error_code &ec, std::size_t byte_receive) {
         auto now = Tools::get_now();
         std::string str(data_, byte_receive);
 
-        Tools::convert_hex(str);
-
         ReceiveData receive_data(ReceiveData::UDP, now, type_,
                                  sender_endpoint_.address().to_string(),
                                  sender_endpoint_.port(), str);

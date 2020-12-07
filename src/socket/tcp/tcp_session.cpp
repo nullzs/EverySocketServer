@@ -1,11 +1,22 @@
 #include "tcp_session.h"
 #include "static_unit.h"
 #include "tools.h"
+#include "decoder_tools.h"
+
+
+TcpSession::TcpSession(asio::ip::tcp::socket socket, int type)
+        : socket_(std::move(socket))
+        , type_(type)
+        , decoder(DecoderTools::get_decoder(type))
+{
+    set_link_value();
+}
 
 void TcpSession::set_link_value() {
     addr_ = socket_.remote_endpoint().address().to_string();
     port_ = socket_.remote_endpoint().port();
     link_str_ = addr_ + ":" + std::to_string(port_);
+
     spdlog::info("[+] tcp link: {}:{}", addr_, port_);
 }
 
@@ -48,12 +59,20 @@ void TcpSession::read_handler(std::error_code ec, std::size_t length) {
     auto now = Tools::get_now();
 
     std::string str(data_, length);
-    Tools::convert_hex(str);
 
-    ReceiveData receive_data(ReceiveData::TCP, now, type_, addr_, port_, str);
-    StaticUnit::data_queue->enqueue(std::move(receive_data));
-    StaticUnit::data_queue_wait_condition.notify_all();
+    decoder->decode(str, data_list, left_data);
+
+    if(!data_list.empty()) {
+        for(auto &data: data_list) {
+            ReceiveData receive_data(ReceiveData::TCP, now++, type_, addr_, port_, data);
+            StaticUnit::data_queue->enqueue(std::move(receive_data));
+        }
+        StaticUnit::data_queue_wait_condition.notify_all();
+        data_list.clear();
+    }
 
     do_read();
 
 }
+
+
