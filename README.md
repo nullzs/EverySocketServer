@@ -19,3 +19,4 @@ And than, modify it.
 - json: use `rapidjson` ,header only.
 - socket: use `asio` ,header only.
 - thread safe queue: use `concurrentqueue` ,header only.
+- unit test : use `catch` ,header only.

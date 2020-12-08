@@ -28,5 +28,5 @@ endif ()
 # test case
 if (DEFINED ENABLE_TEST_UNIT)
     message("TEST ON")
-    add_subdirectory(tests)
+    add_subdirectory(test_unit)
 endif ()
