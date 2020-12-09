@@ -75,3 +75,28 @@ void Tools::destroy_thread(const std::string &event, const std::string &platform
     StaticUnit::log->daily->flush();
 
 }
+
+
+std::string Tools::get_convert_hex(const std::string &str) {
+    std::ostringstream result;
+    for (unsigned char val: str) {
+        result << std::uppercase << std::setw(2) << std::setfill('0') << std::hex << static_cast<unsigned short>(val);
+    }
+    return std::move(result.str());
+}
+
+std::string Tools::get_convert_hex_to_str(const std::string &str){
+    std::stringstream  result;
+    std::string temp(str.size()/2, '0');
+    int temp_num{0};
+    int count = static_cast<int>(str.size()/2);
+
+    for(int i=0; i< count; i++) {
+
+        result << str.substr(2*i, 2);
+        result >> std::hex>> temp_num;
+        result.clear();
+        temp.at(i) = static_cast<unsigned char>(temp_num);
+    }
+    return temp;
+}

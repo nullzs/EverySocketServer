@@ -20,6 +20,8 @@ public:
 
     static void destroy_thread(const std::string &event, const std::string &platform);
 
+    static std::string get_convert_hex_to_str(const std::string &str);
+    static std::string get_convert_hex(const std::string &str);
 };
 
 

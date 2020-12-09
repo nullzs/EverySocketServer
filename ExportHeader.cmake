@@ -8,9 +8,9 @@ include_directories(src/listeners)
 include_directories(src/socket)
 include_directories(src/thread_pool)
 include_directories(src/push)
+include_directories(src/pull)
 include_directories(src/destroy)
 include_directories(src/frame_decoder)
-
 
 # third_party
 include_directories(third_party/spdlog-1.8.1/include)

@@ -48,7 +48,8 @@ void FrameDecoderDelimiterPair::decode_all(std::string &source, std::vector<std:
             break;
         }
         //add to list
-        data_list.push_back(source.substr(beg_pos, end_pos + end_size));
+        int data_len =  end_pos + end_size -beg_pos;
+        data_list.push_back(source.substr(beg_pos, data_len));
     }
 
     if (left_data.size() > 2048) {

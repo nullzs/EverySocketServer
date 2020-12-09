@@ -14,7 +14,8 @@ add_executable(ESServer every_socket_server.cpp)
 
 target_link_libraries(ESServer init_lib
         log_lib config_lib listeners_lib socket_lib
-        destroy_lib push_lib thread_pool_lib frame_decoder_lib
+        destroy_lib push_lib thread_pool_lib
+        frame_decoder_lib pull_lib
         static_unit_lib)
 
 if (UNIX)
