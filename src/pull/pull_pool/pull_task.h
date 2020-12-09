@@ -3,7 +3,8 @@
 
 
 class PullTask {
-
+public:
+    static void do_task();
 };
 
 

@@ -17,6 +17,7 @@ ThreadPool::~ThreadPool() {
     threads_.clear();
     spdlog::info("destroy thread_pool");
     StaticUnit::log->daily->info("ThreadPool destroy.");
+    StaticUnit::log->daily->flush();
 }
 
 void ThreadPool::create_thread_pool()  {

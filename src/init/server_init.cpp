@@ -33,4 +33,6 @@ void ServerInit::init_static_value() {
     StaticUnit::data_queue = std::make_shared<moodycamel::ConcurrentQueue<ReceiveData> >();
 
     StaticUnit::push_queue = std::make_shared<moodycamel::ConcurrentQueue<std::string> >();
+
+    StaticUnit::pull_queue = std::make_shared<moodycamel::ConcurrentQueue<std::string> >();
 }

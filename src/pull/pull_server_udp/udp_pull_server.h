@@ -1,12 +1,12 @@
-#ifndef EVERYSOCKETSERVER_UDP_SERVER_H
-#define EVERYSOCKETSERVER_UDP_SERVER_H
+#ifndef EVERYSOCKETSERVER_UDP_PULL_SERVER_H
+#define EVERYSOCKETSERVER_UDP_PULL_SERVER_H
 
-#include "asio.hpp"
 #include "socket_server.h"
+#include "asio.hpp"
 
-class UdpServer : public SocketServer {
+class UdpPullServer : SocketServer {
 public:
-    UdpServer(asio::io_context &io_context, unsigned short port, int type);
+    UdpPullServer(asio::io_context &io_context, unsigned short port);
 
 private:
     void do_receive();
@@ -16,10 +16,9 @@ private:
         max_length = 1024
     };
     char data_[max_length]{0};
-    int type_;
 
     void receive_handle(std::error_code &ec, size_t byte_receive);
 };
 
 
-#endif //EVERYSOCKETSERVER_UDP_SERVER_H
+#endif //EVERYSOCKETSERVER_UDP_PULL_SERVER_H

@@ -42,6 +42,11 @@ public:
     //io_context queue
     static moodycamel::ConcurrentQueue< std::shared_ptr<asio::io_context> > io_context_queue;
 
+    //pull data,like push queue
+    static std::condition_variable pull_queue_wait_condition;
+    static std::mutex pull_queue_wait_mutex;
+    static std::shared_ptr<moodycamel::ConcurrentQueue<std::string> > pull_queue;
+
 };
 
 

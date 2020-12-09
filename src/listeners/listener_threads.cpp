@@ -46,6 +46,7 @@ void ListenerThreads::listen_thread(unsigned short port, int sock_type, int type
 ListenerThreads::~ListenerThreads() {
     join_thread();
     StaticUnit::log->daily->info("ListenerThreads destroy.");
+    StaticUnit::log->daily->flush();
 }
 
 void ListenerThreads::join_thread() {

@@ -14,6 +14,7 @@ PushPool::~PushPool() {
     }
     push_threads.clear();
     StaticUnit::log->daily->info("PushPool destroy.");
+    StaticUnit::log->daily->flush();
 }
 
 void PushPool::make_pool(int thread_count, int type) {

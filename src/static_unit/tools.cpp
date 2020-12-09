@@ -63,6 +63,7 @@ void Tools::destroy_thread(const std::string &event, const std::string &platform
     StaticUnit::destroy_flag.store(true);
     StaticUnit::data_queue_wait_condition.notify_all();
     StaticUnit::push_queue_wait_condition.notify_all();
+    StaticUnit::pull_queue_wait_condition.notify_all();
 
     while (StaticUnit::io_context_queue.size_approx() > 0) {
         std::shared_ptr<asio::io_context> io_context;
