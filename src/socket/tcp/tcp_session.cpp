@@ -20,7 +20,7 @@ void TcpSession::set_link_value() {
     spdlog::info("[+] tcp link: {}:{}", addr_, port_);
 }
 
-void TcpSession::sock_error(std::error_code &ec) {
+void TcpSession::sock_error(const std::error_code &ec) {
     StaticUnit::log->daily->error(ec.message());
     spdlog::error(ec.message());
     try {
@@ -72,7 +72,19 @@ void TcpSession::read_handler(std::error_code ec, std::size_t length) {
     }
 
     do_read();
-
 }
 
+
+void TcpSession::write(const std::string &data,unsigned int serial_num) {
+    auto self(shared_from_this());
+    asio::async_write(socket_, asio::buffer(data.data(), data.size()),
+                      [self, serial_num](const std::error_code &ec, std::size_t) {
+            if(!ec) {
+                spdlog::info("write ok:{}", serial_num);
+            } else {
+                spdlog::info("write error!");
+                self->sock_error(ec);
+            }
+    });
+}
 

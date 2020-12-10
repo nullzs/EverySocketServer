@@ -48,7 +48,7 @@ void Tools::serialize_receive(std::string &ret, ReceiveData &receive_data) {
     writer.Key("sock_type");
     writer.Int(receive_data.sock_type);
 
-    writer.Key("data");
+    writer.Key("bytes_data");
     writer.String(receive_data.data.data());
 
     writer.Key("timestamp");

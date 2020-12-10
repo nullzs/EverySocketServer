@@ -17,7 +17,6 @@ void UdpPullServer::do_receive() {
 void UdpPullServer::receive_handle(std::error_code &ec, size_t byte_receive) {
     if (!ec && byte_receive > 0) {
         std::string str(data_, byte_receive);
-        spdlog::info("udp cmd:{}", str);
         StaticUnit::pull_queue->enqueue(std::move(str));
         StaticUnit::pull_queue_wait_condition.notify_all();
     }

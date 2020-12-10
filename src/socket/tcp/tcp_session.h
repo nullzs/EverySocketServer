@@ -17,6 +17,8 @@ public:
         return link_str_;
     }
 
+    void write(const std::string &data, unsigned int serial_num);
+
 private:
     asio::ip::tcp::socket socket_;
     int type_;
@@ -34,7 +36,7 @@ private:
     char data_[max_length]{};
 
     void set_link_value();
-    void sock_error(std::error_code &ec);
+    void sock_error(const std::error_code &ec);
 
     void do_read();
 

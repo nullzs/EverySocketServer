@@ -23,7 +23,7 @@ public:
     static std::mutex listener_conf_list_mutex;
 
     //tcp session
-    static std::shared_ptr<std::unordered_map<std::string, std::weak_ptr<TcpSession> > > tcp_session_map;
+    static std::shared_ptr<std::unordered_map<std::string, std::shared_ptr<TcpSession> > > tcp_session_map;
     static std::mutex tcp_session_map_mutex;
 
     //thread destroy flag

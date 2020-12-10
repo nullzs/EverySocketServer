@@ -6,7 +6,7 @@ std::shared_ptr<std::vector<ListenerType> > StaticUnit::listener_conf_list;
 std::mutex StaticUnit::listener_conf_list_mutex;
 
 // map<ip+port, session> like: map<"121.22.123.123:17652", session>
-std::shared_ptr<std::unordered_map<std::string, std::weak_ptr<TcpSession> > > StaticUnit::tcp_session_map;
+std::shared_ptr<std::unordered_map<std::string, std::shared_ptr<TcpSession> > > StaticUnit::tcp_session_map;
 std::mutex StaticUnit::tcp_session_map_mutex;
 
 std::atomic_bool StaticUnit::destroy_flag;

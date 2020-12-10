@@ -25,7 +25,7 @@ void ServerInit::init_static_value() {
 
     {
         std::lock_guard<std::mutex> locker(StaticUnit::tcp_session_map_mutex);
-        StaticUnit::tcp_session_map = std::make_shared<std::unordered_map<std::string, std::weak_ptr<TcpSession>>>();
+        StaticUnit::tcp_session_map = std::make_shared<std::unordered_map<std::string, std::shared_ptr<TcpSession>>>();
     }
 
     StaticUnit::destroy_flag.store(false);
