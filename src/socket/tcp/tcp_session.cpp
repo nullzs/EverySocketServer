@@ -23,6 +23,10 @@ void TcpSession::set_link_value() {
 void TcpSession::sock_error(const std::error_code &ec) {
     StaticUnit::log->daily->error(ec.message());
     spdlog::error(ec.message());
+    {
+        std::lock_guard<std::mutex> locker(StaticUnit::tcp_session_map_mutex);
+        StaticUnit::tcp_session_map->erase(link_str_);
+    }
     try {
         socket_.close();
     } catch (std::exception &e) {
@@ -32,10 +36,7 @@ void TcpSession::sock_error(const std::error_code &ec) {
 }
 
 TcpSession::~TcpSession() {
-    {
-        std::lock_guard<std::mutex> locker(StaticUnit::tcp_session_map_mutex);
-        StaticUnit::tcp_session_map->erase(link_str_);
-    }
+
     spdlog::info("[-] tcp link: {}", link_str_);
 }
 
@@ -75,7 +76,7 @@ void TcpSession::read_handler(std::error_code ec, std::size_t length) {
 }
 
 
-void TcpSession::write(const std::string &data,unsigned int serial_num) {
+void TcpSession::write(const std::string &data, unsigned int serial_num) {
     auto self(shared_from_this());
     asio::async_write(socket_, asio::buffer(data.data(), data.size()),
                       [self, serial_num](const std::error_code &ec, std::size_t) {
